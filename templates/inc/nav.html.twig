@@ -1,0 +1,37 @@
+<div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
+    <button class="menu-icon" type="button" data-toggle></button>
+    <div class="title-bar-title">Menu</div>
+</div>
+
+<div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">Meetup!</li>
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li>
+            <a href="#">Soirées</a>
+                <ul class="menu vertical">
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                </ul>
+            </li>
+            {% if app.user %}
+                <li><a href="{{ path('user_profile') }}">Profil</a></li>
+                <li><a href="{{ path('meeting_index') }}">Meetings</a></li>
+                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                     <li><a href="{{ path('admin_dashboard') }}">Admin</a></li>
+                {% endif %}
+
+            {% else %}
+                <li><a href="{{ path('app_login') }}">Login</a></li>
+                {#
+                <li><a href="{{ path('app_register') }}">Register</a></li>
+                #}
+            {% endif %}
+
+        </ul>
+    </div>
+</div>

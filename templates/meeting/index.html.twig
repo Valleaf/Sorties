@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MeetingController!{% endblock %}
+
+{% block body %}
+    {% set i = 1 %}
+    {% set j = 1 %}
+
+    {# <div class="grid-container fluid app-meeting-checkboxes" style="margin-bottom: 100px;">
+        <div class="grid-x">
+
+            <div class="switch large cell small-3">
+                <p class="checkbox-text-meeting">Meetings I organise</p>
+                <input class="switch-input" id="organizeSwitch" type="checkbox" name="organise" checked>
+                <label class="switch-paddle" for="organizeSwitch">
+                    <span class="show-for-sr">Meetings I organise?</span>
+                    <span class="switch-active" aria-hidden="true">Yes</span>
+                    <span class="switch-inactive" aria-hidden="true">No</span>
+                </label>
+            </div>
+
+            <div class="switch large cell small-3">
+                <p class="checkbox-text-meeting">Meetings I am registered for</p>
+                <input class="switch-input" id="registeredFor" type="checkbox" name="registeredFor" checked>
+                <label class="switch-paddle" for="registeredFor">
+                    <span class="show-for-sr">Meetings I am registered for</span>
+                    <span class="switch-active" aria-hidden="true">Yes</span>
+                    <span class="switch-inactive" aria-hidden="true">No</span>
+                </label>
+            </div>
+            <div class="switch large cell small-3">
+                <p class="checkbox-text-meeting">Meetings I am NOT registered for</p>
+                <input class="switch-input" id="notRegisteredFor" type="checkbox" name="notRegisteredFor" checked>
+                <label class="switch-paddle" for="notRegisteredFor">
+                    <span class="show-for-sr">Meetings I am NOT registered for</span>
+                    <span class="switch-active" aria-hidden="true">Yes</span>
+                    <span class="switch-inactive" aria-hidden="true">No</span>
+                </label>
+            </div>
+            <div class="switch large cell small-3">
+                <p class="checkbox-text-meeting">Finished meetings</p>
+                <input class="switch-input" id="finished" type="checkbox" name="finished">
+                <label class="switch-paddle" for="finished">
+                    <span class="show-for-sr">Finished meetings</span>
+                    <span class="switch-active" aria-hidden="true">Yes</span>
+                    <span class="switch-inactive" aria-hidden="true">No</span>
+                </label>
+            </div>
+
+
+        </div>
+    </div> #}
+
+
+
+
+    <div class="grid-container fluid app-meeting-list">
+        <div class="grid-x grid-margin-x">
+            <fieldset class="cell small-12 medium-3">
+                {% include 'meeting/filter.html.twig' with {form: form} only %}
+            </fieldset>
+            {#
+            <div class="cell medium-5">
+                <div class="tabs-content vertical" data-tabs-content="example-tabs">
+                    {% for meeting in meetings %}
+                        <div class="tabs-panel app-meeting-information {% if j == 1 %} is-active {% endif %}"
+                             id="panel{{ j }}v">
+                            <h4>{{ meeting.name }} </h4>
+                            <h3>{{ meeting.place.name }}</h3>
+                            <span>{{ meeting.place.adress }} a {{ meeting.place.city.name }}</span>
+                            <p>{{ meeting.maxParticipants }} participants maximum , Durée : {{ meeting.length }} minutes
+                                organisé par {{ meeting.organisedBy.firstName }}</p>
+                            <p>{{ meeting.information }}</p>
+                        </div>
+                        {% set j = j + 1 %}
+                    {% endfor %}
+                </div>
+            </div> #}
+            <div class="cell medium-9 grid-container fluid">
+                <ul class="vertical tabs cell grid-x app-meeting-choice" data-tabs id="example-tabs">
+                    {% for meeting in meetings %}
+                        <div class="tabs-title cell small-6 {% if i == 1 %} is-active {% endif %}"><a
+                                    href="#panel{{ i }}v">{{ meeting.name }}</a>
+
+                            <p class="app-meeting-list-subtitle">Le {{ meeting.timeStarting |date("m/d/Y") }}
+                                a {{ meeting.place.name }}, {{ meeting.place.city.name }}
+                                <br>
+                               Organisé par {{ meeting.organisedBy }} du campus {{ meeting.campus }}</p>
+                        </div>
+                        {% set i = i + 1 %}
+                    {% endfor %}
+                </ul>
+                {# <div>{{ knp_pagination_render(meetings) }}</div> #}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

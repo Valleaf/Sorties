@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="grid-x grid-padding-x align-center profile-display">
+        <div class="card center style cell small-4">
+            <div class="card-divider">
+                Bonjour {{ app.user.firstName }} {{ app.user.lastName }} !
+            </div>
+            <img src="" alt="Profile picture">
+            <div class="card-section">
+                <h4>{{ app.user.email }}</h4>
+                <p>Votre telephone est {{ app.user.phone }}</p>
+            </div>
+            <a class="button secondary profile-display-button" href="{{ path('user_profile_modify') }}">Modifier mon profil</a></div>
+
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

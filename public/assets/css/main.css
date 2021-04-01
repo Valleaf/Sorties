@@ -1,0 +1,130 @@
+body, html {
+    height: 100%;
+}
+
+body{
+    background: ivory;
+}
+
+/*LOGIN PAGE CSS */
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+
+.sign-in-form {
+    margin: 6%;
+    padding: 1rem 1.5em;
+    border-radius: .5rem;
+    background-color: darkgray;
+    position: relative;
+}
+
+.sign-in-form h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.sign-in-form label {
+    text-transform: uppercase;
+    color: antiquewhite;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+
+}
+
+.sign-in-form input {
+    color: black;
+}
+
+.sign-in-form input:focus {
+    opacity: .8;
+}
+
+.sign-in-form-username,
+.sign-in-form-password {
+    border-radius: 30px;
+    color: antiquewhite;
+    border: none;
+    opacity: .8;
+    transition: all ease .4s;
+}
+
+.sign-in-form-button {
+    border-radius: 30px;
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 1rem;
+    transition: all ease .4s;
+}
+
+.sign-in-form-button:hover {
+    background-color: #44c8ed;
+    border-color: #44c8ed;
+}
+
+/* PROFILE PAGE CSS */
+.profile-display{
+    padding: 2%;
+    margin: 6%;
+}
+.profile-display-button{
+    align-self: center;
+}
+
+
+/* MEETINGS CSS */
+
+.app-meeting-list{
+    padding: 5%;
+    margin: 0 3% 0 3%;
+}
+
+.app-meeting-list-subtitle{
+    padding: 5%;
+    margin: 0 3% 0 3%;
+    font-size: 0.8rem;
+}
+
+.app-meeting-information{
+    border-style: solid;
+    border-color: antiquewhite;
+    border-width: 0.3rem;
+    border-radius: 2%;
+    padding: 2%;
+}
+
+.app-meeting-choice{
+    border-width: 1rem;
+    border-radius: 2%;
+
+}
+
+.app-meeting-checkboxes{
+    margin-bottom: 80px;
+}
+
+.checkbox-text-meeting{
+    margin: 1%;
+    padding: 1%;
+    color: black;
+    height: 50px;
+}
+
+.app-meeting-filter{
+    width: 100%;
+}
+

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2>Modifier son profil</h2>
+    <div class="grid-x grid-padding-x align-center profile-display">
+{{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+<button type="submit">Modifier !</button>
+{{ form_end(userForm) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | Modifier son profil
+{% endblock %}
+

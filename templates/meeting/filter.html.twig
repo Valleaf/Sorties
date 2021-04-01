@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+
+{{ form_row(form.q) }}
+
+<h4>Campus</h4>
+{{ form_row(form.campus) }}
+<div class="container grid-x grid-margin-x">
+    <h4 class="cell small-6">Date Minimum</h4> <h4 class="cell small-6">Date Maximum</h4>
+</div>
+<div class="container grid-x grid-margin-x">
+    <div class="cell small-6"> {{ form_row(form.min) }}</div>
+    <div class="cell small-6"> {{ form_row(form.max) }}</div>
+</div>
+<div class="container grid-x grid-margin-x ">
+    <div class="cell small-6 medium-3 switch app-meeting-checkboxes ">
+        <p class="checkbox-text-meeting">Meetings I organise</p>
+        {{ form_row(form.isOrganizedBy,{'attr':{'class': 'switch-input','label_attr': 'switch-paddle'}}) }}
+    </div>
+    <div class="cell small-6 medium-3 switch app-meeting-checkboxes">
+        <p class="checkbox-text-meeting">Meetings I am attending</p>
+        {{ form_row(form.isRegisteredTo,{'attr':{'class': 'switch-input','label_attr': 'switch-paddle'}}) }}
+    </div>
+    <div class="cell small-6 medium-3 switch app-meeting-checkboxes">
+        <p class="checkbox-text-meeting">Meetings I am not attending</p>
+        {{ form_row(form.isNotRegisteredTo,{'attr':{'class': 'switch-input','label_attr': 'switch-paddle'}}) }}
+    </div>
+    <div class="cell small-6 medium-3 switch app-meeting-checkboxes">
+        <p class="checkbox-text-meeting">Anterior Meetings</p>
+        {{ form_row(form.isOver,{'attr':{'class': 'switch-input','label_attr': 'switch-paddle'}}) }}
+    </div>
+</div>
+
+<button type="submit" class="button secondary app-meeting-filter">Filtrer</button>
+
+{{ form_end(form) }}

@@ -8,17 +8,22 @@
         <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text">Meetup!</li>
             <li><a href="{{ path('home') }}">Home</a></li>
-            <li>
-            <a href="#">Soirées</a>
-                <ul class="menu vertical">
-                    <li><a href="{{ path('home') }}">Home</a></li>
-                    <li><a href="{{ path('home') }}">Home</a></li>
-                    <li><a href="{{ path('home') }}">Home</a></li>
-                </ul>
-            </li>
+
             {% if app.user %}
-                <li><a href="{{ path('user_profile') }}">Profil</a></li>
-                <li><a href="{{ path('meeting_index') }}">Meetings</a></li>
+                <li>
+                    <a href="#">Profile</a>
+                    <ul class="menu vertical">
+                        <li><a href="{{ path('user_profile') }}">Profile</a></li>
+                        <li><a href="{{ path('user_profile_modify') }}">Modify your profile</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Meetings</a>
+                    <ul class="menu vertical">
+                        <li><a href="{{ path('meeting_index') }}">Meetings</a></li>
+                        <li><a href="{{ path('meeting_add') }}">Add a meeting</a></li>
+                    </ul>
+                </li>
                 <li><a href="{{ path('app_logout') }}">Logout</a></li>
 
                 {% if is_granted("ROLE_ADMIN") %}

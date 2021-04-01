@@ -40,7 +40,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->join('mo.campus','oc')
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
-            ->andWhere('m.status < 73')
+            ->andWhere('m.status NOT IN (73,74)')
             ->orderBy('m.timeStarting')
         ;
         if(!empty($search->q)) {
@@ -65,6 +65,10 @@ class MeetingRepository extends ServiceEntityRepository
         if(!empty($search->isOver)){
             $queryBuilder = $queryBuilder
                 ->andWhere(" DATE_ADD(m.timeStarting,m.length, 'minute')  <= CURRENT_DATE()");
+        }
+        if(empty($search->isOver)){
+            $queryBuilder = $queryBuilder
+                ->andWhere(" DATE_ADD(m.timeStarting,m.length, 'minute')  >= CURRENT_DATE()");
         }
 
         if(!empty($search->isRegisteredTo)){

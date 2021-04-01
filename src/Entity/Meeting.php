@@ -6,6 +6,7 @@ use App\Repository\MeetingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MeetingRepository::class)
@@ -20,61 +21,72 @@ class Meeting
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Please provide a valid name")
+     * @Assert\Length(min=8, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     *
+     * @Assert\GreaterThanOrEqual("today")
      * @ORM\Column(type="datetime")
      */
     private $timeStarting;
 
     /**
+     * @Assert\Positive()
      * @ORM\Column(type="integer")
      */
     private $length;
 
     /**
+     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\LessThanOrEqual(propertyPath="timeStarting")
      * @ORM\Column(type="datetime")
      */
     private $registerUntil;
 
     /**
+     * @Assert\GreaterThanOrEqual(8)
+     * @Assert\LessThan(300)
      * @ORM\Column(type="integer")
      */
     private $maxParticipants;
 
     /**
+     * @Assert\Length(min=10, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $information;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="organiserOf")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="organiserOf",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisedBy;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="meetings")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="meetings",cascade={"persist"})
      */
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="meetings")
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="meetings",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
 
     /**
-     * @ORM\ManyToOne(targetEntity=State::class, inversedBy="meetings")
+     * @ORM\ManyToOne(targetEntity=State::class, inversedBy="meetings",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="meetings")
+     * @Assert\NotBlank()
+     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="meetings",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;

@@ -22,18 +22,14 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profil/modifier',name: 'user_profile_modify')]
-    public function modifyProfile(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response{
-
-
+    #[Route('/profil/modifier', name: 'user_profile_modify')]
+    public function modifyProfile(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
 
         $user = $this->getUser();
-        $userForm = $this->createForm(UserType::class,$user);
-
+        $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
-
-
-        if($userForm->isSubmitted() && $userForm->isValid()) {
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -42,11 +38,11 @@ class UserController extends AbstractController
             );
             $em->persist($user);
             $em->flush();
-            $this->addFlash('success','Le profil a bien été modifié!');
-            return $this->redirectToRoute('user_profile',[]);
+            $this->addFlash('success', 'Le profil a bien été modifié!');
+            return $this->redirectToRoute('user_profile', []);
         }
 
-        return $this->render('user/modify.html.twig',["userForm"=>$userForm->createView()]);
+        return $this->render('user/modify.html.twig', ["userForm" => $userForm->createView()]);
 
     }
 }

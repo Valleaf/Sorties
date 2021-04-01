@@ -59,28 +59,32 @@
             <fieldset class="cell small-12 medium-3">
                 {% include 'meeting/filter.html.twig' with {form: form} only %}
             </fieldset>
-            {#
-            <div class="cell medium-5">
+
+            <div class="cell medium-9">
                 <div class="tabs-content vertical" data-tabs-content="example-tabs">
                     {% for meeting in meetings %}
-                        <div class="tabs-panel app-meeting-information {% if j == 1 %} is-active {% endif %}"
-                             id="panel{{ j }}v">
+                        <div class="tabs-panel app-meeting-information {% if j == 1 %} {% endif %}"
+                             id="meeting{{ meeting.id }}">
                             <h4>{{ meeting.name }} </h4>
                             <h3>{{ meeting.place.name }}</h3>
                             <span>{{ meeting.place.adress }} a {{ meeting.place.city.name }}</span>
                             <p>{{ meeting.maxParticipants }} participants maximum , Durée : {{ meeting.length }} minutes
                                 organisé par {{ meeting.organisedBy.firstName }}</p>
                             <p>{{ meeting.information }}</p>
+                            <h5>Date limite d'inscription : {{ meeting.registerUntil | date("m/d/y - H:i") }}</h5> <a
+                                    href="{{ path('meeting_index') }}"><span>Participate</span></a>
                         </div>
                         {% set j = j + 1 %}
                     {% endfor %}
                 </div>
-            </div> #}
-            <div class="cell medium-9 grid-container fluid">
-                <ul class="vertical tabs cell grid-x app-meeting-choice" data-tabs id="example-tabs">
+            </div>
+            <div class="cell medium-12 grid-container fluid">
+                <ul class="vertical tabs cell grid-x app-meeting-choice" data-tabs id="example-tabs"
+                    data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500"
+                >
                     {% for meeting in meetings %}
-                        <div class="tabs-title cell small-6 {% if i == 1 %} is-active {% endif %}"><a
-                                    href="#panel{{ i }}v">{{ meeting.name }}</a>
+                        <div class="tabs-title cell small-6 medium-3 {% if i == 1 %} {% endif %}"><a
+                                    href="#meeting{{ meeting.id }}">{{ meeting.name }}</a>
 
                             <p class="app-meeting-list-subtitle">Le {{ meeting.timeStarting |date("m/d/Y") }}
                                 a {{ meeting.place.name }}, {{ meeting.place.city.name }}

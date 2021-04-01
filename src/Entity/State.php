@@ -25,7 +25,7 @@ class State
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="status", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="status", orphanRemoval=true,cascade={"persist"})
      */
     private $meetings;
 
@@ -77,7 +77,10 @@ class State
                 $meeting->setStatus(null);
             }
         }
-
         return $this;
+    }
+
+    public function __toString() {
+        return $this->label;
     }
 }

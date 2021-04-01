@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Create a meeting</h2>
+    <div class="grid-x grid-padding-x align-center profile-display">
+        {{ form_start(meetingForm) }}
+        {{ form_widget(meetingForm) }}
+        <button type="submit">Create !</button>
+        {{ form_end(meetingForm) }}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Create a meeting
+
+{% endblock %}
+

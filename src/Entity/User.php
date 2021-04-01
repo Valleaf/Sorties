@@ -60,7 +60,7 @@ class User implements UserInterface
     private $isActive;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="organisedBy", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="organisedBy", orphanRemoval=true,cascade={"persist"})
      */
     private $organiserOf;
 

@@ -6,6 +6,7 @@ use App\Repository\PlaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PlaceRepository::class)
@@ -20,32 +21,45 @@ class Place
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min=4, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min=4, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $adress;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *      min = -90,
+     *      max = 90,
+     *      notInRangeMessage = "Latitude must be between -90 and 90",
+     * )     * @ORM\Column(type="integer")
      */
     private $latitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = -180,
+     *      max = 180,
+     *      notInRangeMessage = "Longitude must be between -180 and 180")
+     *     * @ORM\Column(type="integer")
      */
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="place", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="place", orphanRemoval=true,cascade={"persist"})
      */
     private $meetings;
 
     /**
-     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="places")
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="places",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $city;
@@ -148,5 +162,9 @@ class Place
         $this->city = $city;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 }

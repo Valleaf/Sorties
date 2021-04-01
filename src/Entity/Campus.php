@@ -25,12 +25,12 @@ class Campus
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="campus", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="campus", orphanRemoval=true,cascade={"persist"})
      */
     private $students;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="campus", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Meeting::class, mappedBy="campus", orphanRemoval=true,cascade={"persist"})
      */
     private $meetings;
 

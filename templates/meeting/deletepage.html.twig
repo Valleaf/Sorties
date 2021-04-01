@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Cancel Meeting
+ {% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    {{ form_row(form.explanation) }}
+    <button class="button danger" type="submit">Cancel this meeting</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+<div class="cell medium-12 grid-container fluid">
+    <ul class="vertical tabs cell grid-x app-meeting-choice" data-tabs id="example-tabs"
+        data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500"
+    >
+        {% for meeting in meetings %}
+            <div class="tabs-title cell small-6 medium-3 {% if i == 1 %}is-active {% endif %}"><a
+                        href="#meeting{{ meeting.id }}">{{ meeting.name }}</a>
+
+                <p class="app-meeting-list-subtitle">Le {{ meeting.timeStarting |date("m/d/Y") }}
+                    a {{ meeting.place.name }}, {{ meeting.place.city.name }}
+                    <br>
+                    Organisé par {{ meeting.organisedBy }} du campus {{ meeting.campus }}</p>
+            </div>
+            {% set i = i + 1 %}
+        {% endfor %}
+    </ul>
+    {# <div>{{ knp_pagination_render(meetings) }}</div> #}
+</div>

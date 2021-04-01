@@ -35,11 +35,13 @@ class MeetingRepository extends ServiceEntityRepository
                 'mo',
                 'oc',
                 'mp',
+                'p',
                 'mpc')
             ->innerJoin('m.organisedBy','mo')
             ->join('mo.campus','oc')
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
+            ->join('m.participants','p')
             ->andWhere('m.status NOT IN (73,74)')
             ->orderBy('m.timeStarting')
         ;
@@ -62,10 +64,7 @@ class MeetingRepository extends ServiceEntityRepository
             $queryBuilder = $queryBuilder
                 ->andWhere('m.organisedBy = '.$user->getId());
         }
-        if(!empty($search->isOver)){
-            $queryBuilder = $queryBuilder
-                ->andWhere(" DATE_ADD(m.timeStarting,m.length, 'minute')  <= CURRENT_DATE()");
-        }
+
         if(empty($search->isOver)){
             $queryBuilder = $queryBuilder
                 ->andWhere(" DATE_ADD(m.timeStarting,m.length, 'minute')  >= CURRENT_DATE()");

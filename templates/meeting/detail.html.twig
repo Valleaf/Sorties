@@ -1,0 +1,43 @@
+<div class="cell medium-9">
+    <div class="tabs-content vertical" data-tabs-content="example-tabs">
+        {% for meeting in meetings %}
+            <div class="tabs-panel app-meeting-information {% if j == 1 %} is-active {% endif %}"
+                 id="meeting{{ meeting.id }}">
+                <h4>{{ meeting.name }} </h4> <h6> Status : {{ meeting.status }}</h6>
+                <h3>{{ meeting.place.name }}</h3>
+                <span>{{ meeting.place.adress }} a {{ meeting.place.city.name }}</span>
+                <p>{{ meeting.maxParticipants }} participants maximum , Durée : {{ meeting.length }} minutes
+                    organisé par {{ meeting.organisedBy.firstName }}</p>
+                <p>{{ meeting.information }}</p>
+                <h5>Date limite d'inscription : {{ meeting.registerUntil | date("m/d/y - H:i") }}</h5>
+                {% for p in meeting.participants %}
+                    {{ p }}
+                {% endfor %}
+
+                {% if meeting.registerUntil > date() and meeting.status.label == 'Ouverte' %}
+                    <a href="{{ path('meeting_add_or_remove',{'id':meeting.id}) }}"><h5>I want to participate ! / I do not want to go anymore</h5></a>
+                {% else %}
+                    <h5>
+                        Registration is not allowed at this time
+                    </h5>
+                {% endif %}
+
+                {% if meeting.organisedBy.username == app.user.username %}
+                    <p><button class="alert button" data-toggle="animatedModal10">Cancel meeting</button></p>
+                {% endif %}
+                <div class="reveal" id="animatedModal10" data-reveal data-close-on-click="true" data-animation-in="slide-in-down" data-animation-out="scale-out-down">
+                    <h2>Are you sure?</h2>
+                    <h4>Enter a reason for the cancellation</h4>
+
+                    <a href="{{ path('meeting_cancel',{'id':meeting.id}) }}">
+                        <button type="submit" class="button secondary app-meeting-filter">Cancel</button>
+                    </a>
+                    <button class="close-button" data-close aria-label="Close reveal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            {% set j = j + 1 %}
+        {% endfor %}
+    </div>
+</div>

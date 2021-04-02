@@ -4,6 +4,10 @@ body, html {
 
 body{
     background: ivory;
+    font-family: 'Cambria', "Times New Roman", serif;
+}
+.top-bar,h1,h2,h3,h4,h5,h6{
+    font-family: 'Squada One', cursive;
 }
 
 /*LOGIN PAGE CSS */

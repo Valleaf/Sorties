@@ -11,7 +11,7 @@
                 <p>{{ meeting.information }}</p>
                 <h5>Date limite d'inscription : {{ meeting.registerUntil | date("m/d/y - H:i") }}</h5>
                 {% for p in meeting.participants %}
-                    {{ p }}
+                    <a href="{{ path('user_profile_view' ,{'id':p.id }) }}">{{ p }}</a>
                 {% endfor %}
 
                 {% if meeting.registerUntil > date() and meeting.status.label == 'Ouverte' %}

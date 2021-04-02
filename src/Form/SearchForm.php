@@ -36,6 +36,7 @@ class SearchForm extends AbstractType
             ->add('min', DateType::class,[
                 'label'=>false,
                 'required'=>false,
+                'years'=>[2021,2022],
                 'attr'=>[
                     'placeholder'=>'Entre '
                 ]
@@ -43,6 +44,7 @@ class SearchForm extends AbstractType
             ->add('max', DateType::class,[
                 'label'=>false,
                 'required'=>false,
+                'years'=>[2021,2022],
                 'attr'=>[
                     'placeholder'=>'et  '
                 ]

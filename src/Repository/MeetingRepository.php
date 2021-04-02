@@ -29,6 +29,10 @@ class MeetingRepository extends ServiceEntityRepository
     public function findActive(SearchData $search,
                                User $user): Paginator
     {
+
+        $currentTime = new \DateTime();
+        $currentTime->modify('- 30 days');
+        $timeOneMonth = $currentTime->format('Y-m-d');
         $queryBuilder = $this->createQueryBuilder('m');
         $queryBuilder
             ->select('m',
@@ -44,6 +48,8 @@ class MeetingRepository extends ServiceEntityRepository
             ->join('m.participants','p')
             ->andWhere('m.status NOT IN (73,74)')
             ->orderBy('m.timeStarting')
+            ->andWhere('m.timeStarting >= :timeOneMonth')
+            ->setParameter('timeOneMonth',"$timeOneMonth")
         ;
         if(!empty($search->q)) {
             $queryBuilder = $queryBuilder

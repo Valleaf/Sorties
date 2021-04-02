@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h3>{{ userProfile.username }}</h3>
+    <ul>
+        <li>First Name :{{ userProfile.firstName }}</li>
+        <li>Last Name :{{ userProfile.lastName }}</li>
+        <li>Phone : {{ userProfile.phone }}</li>
+        <li>Email :{{ userProfile.email }}</li>
+        <li>Campus :{{ userProfile.campus }}</li>
+    </ul>
+{% endblock %}
+
+{% block title %}
+{{ parent() }} | {{ userProfile.username }}
+{% endblock %}
+

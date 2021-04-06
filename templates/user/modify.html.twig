@@ -1,16 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h2>Modifier son profil</h2>
-    <div class="grid-x grid-padding-x align-center profile-display">
-{{ form_start(userForm) }}
-    {{ form_widget(userForm) }}
-<button type="submit">Modifier !</button>
-{{ form_end(userForm) }}
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css')}}">
+    {{ form_start(userForm) }}
+
+    <div class="grid-container app-modify-profile-box">
+        <div class="grid-x grid-padding-x align-center box-inner">
+            <h2 class="cell small-12">Modifier son profil</h2>
+            <div class="cell small-6">
+                {{ form_row(userForm.username) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(userForm.firstName) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(userForm.lastName) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(userForm.email) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(userForm.phone) }}
+            </div>
+            <div class="cell small-12">
+                {{ form_row(userForm.plainPassword) }}
+            </div>
+            {{ form_rest(userForm) }}
+            <button class="button" type="submit">Modifier !</button>
+            {{ form_end(userForm) }}
+        </div>
     </div>
 {% endblock %}
 
 {% block title %}
-{{ parent() }} | Modifier son profil
+    {{ parent() }} | Modifier son profil
 {% endblock %}
 

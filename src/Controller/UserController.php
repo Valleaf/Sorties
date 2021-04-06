@@ -18,7 +18,6 @@ class UserController extends AbstractController
     public function index(): Response
     {
 
-        ##TODO: Verifier que l'utilisateur voit sa propre page et uniquement lui
         return $this->render('user/profile.html.twig', [
             'controller_name' => 'UserController',
         ]);
@@ -31,14 +30,26 @@ class UserController extends AbstractController
         $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+            if ($user->getPlainPassword() !== null) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $userForm->get('plainPassword')->getData()
+                    )
+                );
+            }
+
+            /*
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $userForm->get('plainPassword')->getData()
                 )
-            );
+            );*/
             $em->persist($user);
             $em->flush();
+            $user->setImageFile(null);
             $this->addFlash('success', 'Le profil a bien été modifié!');
             return $this->redirectToRoute('user_profile', []);
         }
@@ -57,6 +68,12 @@ class UserController extends AbstractController
          $user = $this->getUser();
          $userRepo = $entityManager->getRepository(User::class);
          $userProfile =  $userRepo->find($id);
+
+
+        if($userProfile==null){
+
+             return $this->redirectToRoute('home');
+         }
 
          if($user->getUsername()==$userProfile->getUsername()){
             return $this->redirectToRoute('user_profile');

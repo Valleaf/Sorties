@@ -4,16 +4,16 @@
 
 
 {% block body %}
+    <link rel="stylesheet" href="{{ asset('assets/css/meetings.css') }}">
     {% set i = 1 %}
     {% set j = 1 %}
 
     <div class="grid-container fluid app-meeting-list">
         <div class="grid-x grid-margin-x">
 
-            <fieldset class="cell small-12 medium-3">
+            <fieldset class="cell small-12 medium-3 filter-box">
                 {% include 'meeting/filter.html.twig' with {form: form} only %}
             </fieldset>
-
             {% include 'meeting/detail.html.twig' %}
 
             {% include 'meeting/full-list.html.twig' %}

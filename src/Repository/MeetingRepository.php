@@ -39,17 +39,18 @@ class MeetingRepository extends ServiceEntityRepository
                 'mo',
                 'oc',
                 'mp',
-                'p',
-                'mpc')
+                'mpc',
+                's',
+                'p')
             ->innerJoin('m.organisedBy','mo')
             ->join('mo.campus','oc')
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
-            ->join('m.participants','p')
-            ->andWhere('m.status NOT IN (73,74)')
-            ->orderBy('m.timeStarting')
+            ->join('m.status','s')
+            ->leftJoin('m.participants','p') //Reduit le nombre de requete, mais fait buguer au niveau de la recherche-
             ->andWhere('m.timeStarting >= :timeOneMonth')
             ->setParameter('timeOneMonth',"$timeOneMonth")
+            ->orderBy('m.timeStarting')
         ;
         if(!empty($search->q)) {
             $queryBuilder = $queryBuilder
@@ -90,10 +91,8 @@ class MeetingRepository extends ServiceEntityRepository
 
 
         $query = $queryBuilder->getQuery();
-        $query->setMaxResults(50);
         //return $this->paginator->paginate($query,1,3);
-         $paginator = new Paginator($query);
-            return $paginator;
+        return new Paginator($query);
     }
 
 

@@ -3,8 +3,22 @@
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
+
+    {% if not app.user %}
+    <div class="callout large alert">
+        <h5>Connectez vous gratuitement !</h5>
+        <p>Rejoignez une communaute grandissante et organisez vos evenements en toute facilité</p>
+        <a href="{{ path('app_login') }}">Connectez vous pour participer a la communauté</a>
+    </div>
+    {% endif %}
+
+    {% if app.request.cookies.has('theme')%}
+        {% set test = app.request.cookies.get('theme') %}
+      TEST COOKIE  {{ test }}  ICI
+    {% endif %}
+
 {# -------------------------------------- ORBIT PART --------------------------------------  #}
-    <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+    <div class="orbit hide-for-small-only" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
         <div class="orbit-wrapper">
             <div class="orbit-controls">
                 <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
@@ -35,5 +49,32 @@
             <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
         </nav>
     </div>
+
+    <div class="show-for-small-only">
+        <div class="media-object stack-for-small">
+            <div class="media-object-section">
+                <div class="thumbnail">
+                    <img src= "{{ asset('assets/img/bg/orange.jpg')}}">
+                </div>
+            </div>
+            <div class="media-object-section">
+                <h4>Soirée de 20/08/2019</h4>
+                <p>Organisez des rencontres inoubliables</p>
+            </div>
+        </div>
+        <div class="media-object stack-for-small">
+            <div class="media-object-section">
+                <div class="thumbnail ">
+                    <img src= "{{ asset('assets/img/bg/purple.jpg')}}">
+                </div>
+            </div>
+            <div class="media-object-section">
+                <h4>Soirée de 12/01/2019</h4>
+                <p>Vous vous souviendrez de ces soiréess</p>
+            </div>
+        </div>
+    </div>
+
+
 
 {% endblock %}

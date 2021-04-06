@@ -3,9 +3,14 @@
 {% block title %}Reset your password{% endblock %}
 
 {% block body %}
+    <video autoplay muted loop class="myVideo">
+        <source src="{{ asset('assets/vid/login-black.mp4') }}" type="video/mp4">
+    </video>
+
     {% for flashError in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
+    <div class="request-content">
     <h1>Reset your password</h1>
 
     {{ form_start(requestForm) }}
@@ -17,6 +22,6 @@
             </small>
         </div>
 
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+        <button class="button">Send password reset email</button>
+    {{ form_end(requestForm) }}</div>
 {% endblock %}

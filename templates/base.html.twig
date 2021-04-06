@@ -9,7 +9,10 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css"/>
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Crete+Round&family=Squada+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Crete+Round&family=Squada+One&display=swap"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+              rel="stylesheet">
     {% endblock %}
 
     {% block javascripts %}
@@ -29,8 +32,11 @@
 
 {% for label, messages in app.flashes %}
     {% for message in messages %}
-        <div class="flash flash-{{ label }}">
+        <div class="callout secondary {{ label }} flash flash-{{ label }}"  data-closable="slide-out-right">
             {{ message }}
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     {% endfor %}
 {% endfor %}

@@ -14,6 +14,8 @@ use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MeetingController extends AbstractController
@@ -67,7 +69,7 @@ class MeetingController extends AbstractController
 
 
     #[Route('/meeting/add', name: 'meeting_add')]
-    public function add(EntityManagerInterface $em, Request $request): Response
+    public function add(MailerInterface $mailer, EntityManagerInterface $em, Request $request): Response
     {
 
         $user = $this->getUser();
@@ -86,6 +88,10 @@ class MeetingController extends AbstractController
             $em->persist($meeting);
             $em->flush();
             $this->addFlash('success', 'The meeting was sucessfully created !');
+            $this->sendEmail(
+                $mailer,$user->getEmail(),
+                'Confirmation : La sortie'.$meeting->getName() .'a été créée',
+                'Bonjour\nCeci est un email de confirmation.\nLa sortie '.$meeting->getName().'est valide');
             return $this->redirectToRoute('meeting_index', []);
         }
         dump($meeting);
@@ -128,6 +134,18 @@ class MeetingController extends AbstractController
         return $this->render('meeting/deletepage.html.twig',[
             'form'=>$cancelform->createView()
         ]);
+
+    }
+
+    public function sendEmail(MailerInterface $mailer,string $email, string $subject,string $text) :void
+    {
+        $email = (new Email())
+            ->from('confirmation@meetup.com')
+            ->to($email)
+            ->subject($subject)
+            ->text($text);
+
+        $mailer->send($email);
 
     }
 }

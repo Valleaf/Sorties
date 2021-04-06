@@ -1,0 +1,24 @@
+<aside class="profile-card">
+    <header>
+        <!-- here’s the avatar -->
+        <img src="{{ asset('assets/img/profile_picture/') }}{{ app.user.imageName }}" alt="profile-picture">
+        <!-- Full Name -->
+        <h1>{{ app.user.firstName }} {{ app.user.lastName }}</h1>
+        <!-- Username -->
+        <h2>- {{ app.user.username }} -</h2>
+    </header>
+
+    <div class="profile-bio grid-y" style="height: 50%;">
+        <div class="cell small-3 ">
+            <h4>{{ app.user.email }}</h4>
+        </div>
+        <div class="cell small-3 ">
+            <h5>Phone : {{ app.user.phone }}</h5>
+            </div>
+        <div class="cell small-3 ">
+            <h4>{{ app.user.campus }}</h4>
+        </div>
+    </div>
+
+</aside>
+

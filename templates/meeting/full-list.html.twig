@@ -3,8 +3,8 @@
         data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500"
     >
         {% for meeting in meetings %}
-            <div class="tabs-title cell small-6 medium-3 {% if i == 1 %}is-active {% endif %}"><a
-                        href="#meeting{{ meeting.id }}">{{ meeting.name }}</a>
+            <div class="tabs-title cell small-6 medium-3 {% if i == 1 %}is-active {% endif %}">
+                <a href="#meeting{{ meeting.id }}"><h4> {{ meeting.name }}</h4></a>
 
                 <p class="app-meeting-list-subtitle">Le {{ meeting.timeStarting |date("m/d/Y") }}
                     a {{ meeting.place.name }}, {{ meeting.place.city.name }}

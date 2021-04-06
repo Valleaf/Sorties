@@ -80,7 +80,12 @@ body{
     border-color: #44c8ed;
 }
 
+
+
+
+
 /* PROFILE PAGE CSS */
+
 .profile-display{
     padding: 2%;
     margin: 6%;
@@ -90,7 +95,17 @@ body{
 }
 
 
+
+
+
+
 /* MEETINGS CSS */
+
+.add-box{
+    border-color: black;
+    border-width: 10px;
+    border-style: solid;
+}
 
 .app-meeting-list{
     padding: 5%;
@@ -131,4 +146,58 @@ body{
 .app-meeting-filter{
     width: 100%;
 }
+
+/* MODIFY PROFILE CSS */
+
+
+.app-modify-profile-box{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    background-color: rgba(0,0,0, 0.5);
+    width: 100%;
+    max-width: 600px;
+    padding: 5px;
+    border-width: 2px;
+    border-style:solid;
+    border-color: #b78846;}
+.box-inner {
+    position: relative;
+    border: 2px solid #b78846;
+    padding: 50px;
+}
+
+/** LOGIN CSS **/
+/* Style the video: 100% width and height to cover the entire window */
+.myVideo {
+    position: fixed; right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto; z-index: -100;
+    background-size: cover;
+}
+
+/* Add some content at the bottom of the video/page */
+.login-content {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+}
+
+.request-content {
+    width: 400px;
+    height: 400px;
+    color: white;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    padding: 2%;
+}
+
+
 

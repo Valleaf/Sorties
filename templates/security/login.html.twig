@@ -3,7 +3,11 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <div class="sign-in-form">
+    <video autoplay muted loop class="myVideo">
+        <source src="{{ asset('assets/vid/login-black.mp4') }}" type="video/mp4">
+    </video>
+
+    <div class="sign-in-form login-content">
 
     <form method="post">
         {% if error %}

@@ -3,9 +3,14 @@
 {% block title %}Password Reset Email Sent{% endblock %}
 
 {% block body %}
+    <video autoplay muted loop class="myVideo">
+        <source src="{{ asset('assets/vid/login-black.mp4') }}" type="video/mp4">
+    </video>
+    <div class="request-content">
     <p>
         An email has been sent that contains a link that you can click to reset your password.
         This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
     </p>
     <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    </div>
 {% endblock %}

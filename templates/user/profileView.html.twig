@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css')}}">
+
+    <div class="grid-x grid-padding-x align-center profile-body profile-display">
+        {%  include('user/profile-card-view.html.twig') %}
+
+    </div>
+{#
 <h3>{{ userProfile.username }}</h3>
     <ul>
         <li>First Name :{{ userProfile.firstName }}</li>
@@ -8,7 +15,8 @@
         <li>Phone : {{ userProfile.phone }}</li>
         <li>Email :{{ userProfile.email }}</li>
         <li>Campus :{{ userProfile.campus }}</li>
-    </ul>
+        <img src="{{ asset('assets/img/profile_picture/') }}{{ userProfile.imageName }}" width="300px" alt="">
+    </ul> #}
 {% endblock %}
 
 {% block title %}

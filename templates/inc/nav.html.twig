@@ -7,36 +7,74 @@
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text">Meetup!</li>
-            <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('home') }}">Home <span class="material-icons-outlined">
+cottage
+</span></a></li>
 
             {% if app.user %}
                 <li>
-                    <a href="#">Profile</a>
+                    <a href="#">Profile <span class="material-icons-outlined">
+person_pin
+</span></a>
                     <ul class="menu vertical">
                         <li><a href="{{ path('user_profile') }}">Profile</a></li>
                         <li><a href="{{ path('user_profile_modify') }}">Modify your profile</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Meetings</a>
+                    <a href="#">Meetings <span class="material-icons-outlined">
+nightlife
+</span></a>
                     <ul class="menu vertical">
-                        <li><a href="{{ path('meeting_index') }}">Meetings</a></li>
-                        <li><a href="{{ path('meeting_add') }}">Add a meeting</a></li>
+                        <li><a href="{{ path('meeting_index') }}">Meetings <span class="material-icons-outlined">
+menu_book
+</span></a></li>
+                        <li><a href="{{ path('meeting_add') }}">Add a meeting <span class="material-icons-outlined">
+east
+</span></a></li>
                     </ul>
                 </li>
-                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                <li><a href="{{ path('app_logout') }}">Logout <span class="material-icons-outlined">
+public_off
+</span></a></li>
 
                 {% if is_granted("ROLE_ADMIN") %}
-                     <li><a href="{{ path('admin_dashboard') }}">Admin</a></li>
+                    <li><a href="{{ path('admin_dashboard') }}">Admin <span class="material-icons-outlined">
+badge
+</span></a></li>
                 {% endif %}
 
             {% else %}
-                <li><a href="{{ path('app_login') }}">Login</a></li>
+                <li><a href="{{ path('app_login') }}">Login <span class="material-icons-outlined">
+hail
+</span></a></li>
                 {#
                 <li><a href="{{ path('app_register') }}">Register</a></li>
                 #}
             {% endif %}
 
         </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu" data-dropdown-menu>
+            <li><button class="button" data-open="themeModal">Theme</button></li>
+            <li><button class="button" data-open="langueModal">Langue</button></li>
+        </ul>
+    </div>
+    <div class="reveal" id="themeModal" data-reveal>
+        <h1>THEME SELECTOR</h1>
+        <p class="lead">Choix du theme</p>
+        <a href="{{ path('home_theme' , {'id':1}) }}">Theme numero 1</a>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="reveal" id="langueModal" data-reveal>
+        <h1>Langue !</h1>
+        <p class="lead">Choix de la langue</p>
+        <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 </div>

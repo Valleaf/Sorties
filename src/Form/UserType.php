@@ -3,16 +3,14 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
@@ -22,19 +20,32 @@ class UserType extends AbstractType
             ->add('username')
             ->add('firstName')
             ->add('lastName')
-            ->add('email',EmailType::class)
-            ->add('phone',NumberType::class)
+            ->add('email', EmailType::class)
+            ->add('phone', TextType::class)
             ->add('plainPassword', RepeatedType::class, array(
-            'type'              => PasswordType::class,
-            'mapped'            => false,
-            'first_options'     => array('label' => 'New password'),
-            'second_options'    => array('label' => 'Confirm new password'),
-            'invalid_message' => 'The password fields must match.',
-        ));
+                'type' => PasswordType::class,
+                'required' => false,
+                'first_options' => array('label' => 'New password'),
+                'second_options' => array('label' => 'Confirm new password'),
+                'invalid_message' => 'The password fields must match.',
+            ))
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Telecharger',
+                'download_uri' => true,
+                'image_uri' => true,
+                'imagine_pattern' => 'avatar',
+                'asset_helper' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => User::class]);
+        $resolver->setDefaults([
+            'data_class' => User::class,
+            'validation_groups' => ['registration'],
+        ]);
     }
 }

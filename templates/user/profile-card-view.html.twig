@@ -1,0 +1,27 @@
+<aside class="profile-card">
+    <header>
+        <!-- here’s the avatar -->
+        {#  | imagine_filter('avatar')#}
+        {% set var = asset('assets/img/profile_picture/') ~ userProfile.imageName  %}
+        <img src="{{ var }}" alt="profile-picture" >
+        <!-- Full Name -->
+        <h1>{{ userProfile.firstName }} {{ userProfile.lastName }}</h1>
+        <!-- Username -->
+        <h2>- {{ userProfile.username }} -</h2>
+    </header>
+
+    <!-- bit of a bio; who are you? -->
+    <div class="profile-bio grid-y" style="height: 50%;">
+        <div class="cell small-3 ">
+            <h4>{{ userProfile.email }}</h4>
+        </div>
+        <div class="cell small-3 ">
+            <h5>Phone : {{ userProfile.phone }}</h5>
+        </div>
+        <div class="cell small-3 ">
+            <h4>{{ userProfile.campus }}</h4>
+        </div>
+    </div>
+
+</aside>
+

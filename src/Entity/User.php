@@ -157,10 +157,16 @@ class User  implements UserInterface
      */
     private ?DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Group::class, mappedBy="members",cascade={"persist"})
+     */
+    private $groups;
+
     public function __construct()
     {
         $this->organiserOf = new ArrayCollection();
         $this->meetings = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -438,5 +444,32 @@ class User  implements UserInterface
     {
         $this->imageFile = base64_decode($this->imageFile);
 
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(Group $group): self
+    {
+        if ($this->groups->removeElement($group)) {
+            $group->removeMember($this);
+        }
+
+        return $this;
     }
 }

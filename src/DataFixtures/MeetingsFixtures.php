@@ -31,7 +31,7 @@ class MeetingsFixtures extends Fixture implements DependentFixtureInterface
             $place = $this->getReference('place_'.mt_rand(1,40));
 
 
-            $meet->setName('Reunion' . 'au' . $faker->jobTitle . ' ' . $faker->colorName)
+            $meet->setName('Sortie ' . 'des ' . $faker->jobTitle . ' ' . $faker->colorName)
                  ->setTimeStarting($date)
                 ->setLength($length)
                 ->setRegisterUntil($dateLater)

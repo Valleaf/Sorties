@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Ajouter un lieu{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css')}}">
+    <style>
+        .required{
+            color: white;
+        }
+    </style>
+    <video autoplay muted loop class="myVideo">
+        <source src="{{ asset('assets/vid/place.mp4') }}" type="video/mp4">
+    </video>
+    {{ form_start(placeForm) }}
+
+    <div class="grid-container app-modify-profile-box app-add-place">
+        <div class="grid-x grid-padding-x align-center box-inner">
+            <h2 class="cell small-12">Ajouter un lieu</h2>
+            <div class="cell small-6">
+                {{ form_row(placeForm.name) }}
+            </div>
+            <div class="cell small-12">
+                {{ form_row(placeForm.city) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(placeForm.adress) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(placeForm.longitude) }}
+            </div>
+            <div class="cell small-6">
+                {{ form_row(placeForm.latitude) }}
+            </div>
+            {{ form_rest(placeForm) }}
+            <button class="button" type="submit">Ajouter !</button>
+            {{ form_end(placeForm) }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -60,7 +60,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="cell small-6">
+                        <div class="cell small-12">
                         {% if meeting.registerUntil > date() and meeting.status.label == 'Ouverte' %}
                             <button class="button success"><a href="{{ path('meeting_add_or_remove',{'id':meeting.id}) }}"><h5>I want to participate !
                                     / I do not want to go anymore</h5></a></button>

@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}{{ parent()}} | Accueil!{% endblock %}
 
 {% block body %}
+
 
     {% if not app.user %}
     <div class="callout large alert">
@@ -12,10 +13,7 @@
     </div>
     {% endif %}
 
-    {% if app.request.cookies.has('theme')%}
-        {% set test = app.request.cookies.get('theme') %}
-      TEST COOKIE  {{ test }}  ICI
-    {% endif %}
+
 
 {# -------------------------------------- ORBIT PART --------------------------------------  #}
     <div class="orbit hide-for-small-only" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">

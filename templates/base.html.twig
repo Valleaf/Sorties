@@ -13,6 +13,16 @@
               rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
               rel="stylesheet">
+        {% if app.request.cookies.has('theme')%}
+            {% set test = app.request.cookies.get('theme') %}
+            {% if test == 2 %}
+                <link rel="stylesheet" href="{{ asset('assets/css/dark.css') }}">
+            {% elseif test == 3 %}
+                <link rel="stylesheet" href="{{ asset('assets/css/lime.css') }}">
+            {% elseif test == 4 %}
+                <link rel="stylesheet" href="{{ asset('assets/css/red.css') }}">
+            {% endif %}
+        {% endif %}
     {% endblock %}
 
     {% block javascripts %}

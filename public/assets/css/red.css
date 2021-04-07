@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel+Sans&family=UnifrakturMaguntia&display=swap');
+.top-bar,h1,h2,h3,h4,h5,h6{
+    font-family: 'UnifrakturMaguntia', cursive;
+}
+
+body{
+    background: ivory;
+    font-family: 'Martel Sans', sans-serif;
+}
+
+.top-bar{
+background-color: #431420;
+}

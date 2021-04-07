@@ -24,7 +24,7 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud->setFormOptions(
             ['validation_groups' => ['new_user']],
-            ['validation_groups' => ['edit_user'], '...' => '...'],
+            ['validation_groups' => ['edit_user']],
         );
     }
 

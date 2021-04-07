@@ -28,7 +28,7 @@ class City
 
     /**
      * @Assert\Regex("/^[0-9]{5}$/")
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $postcode;
 
@@ -59,12 +59,12 @@ class City
         return $this;
     }
 
-    public function getPostcode(): ?int
+    public function getPostcode(): ?string
     {
         return $this->postcode;
     }
 
-    public function setPostcode(int $postcode): self
+    public function setPostcode(string $postcode): self
     {
         $this->postcode = $postcode;
 

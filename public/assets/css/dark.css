@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Pacifico&display=swap');
+.top-bar,h1,h2,h3,h4,h5,h6{
+    font-family: 'Pacifico', cursive;
+}
+
+body{
+    background: ivory;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.top-bar{
+background: #007bff;
+}
+

@@ -16,7 +16,7 @@ class PlaceFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
         for ($i=1;$i<=40;$i++){
             $place = new Place();
-            $name = $faker->company;
+            $name = $faker->company.$faker->streetName;
             $address = $faker->streetAddress;
             $long = $faker->longitude;
             $lat = $faker->latitude;

@@ -22,9 +22,11 @@ class DefaultController extends AbstractController
     public function selectTheme($id): Response
     {
         $expire = 6 * 30 * 24 * 3600;
+        $cookie = Cookie::create('theme')
+            ->withValue($id);
         $this->addFlash('success', 'Choix du theme actif!');
         $response = $this->redirectToRoute('home');
-        $response->headers->setCookie(Cookie::create('theme', 1,$expire));
+        $response->headers->setCookie($cookie);
         return $response;
 
     }

@@ -44,5 +44,8 @@ security:
     access_control:
     - { path: ^/profil, roles: ROLE_USER }
     - { path: ^/meeting, roles: ROLE_USER }
+    - { path: ^/group, roles: ROLE_USER }
+    - { path: ^/place, roles: ROLE_USER }
+    - { path: ^/city, roles: ROLE_USER }
     - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }

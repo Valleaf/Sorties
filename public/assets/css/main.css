@@ -121,9 +121,8 @@ body{
 .app-meeting-information{
     border-style: solid;
     border-color: antiquewhite;
-    border-width: 0.3rem;
+    border-width: 0.1rem;
     border-radius: 2%;
-    padding: 2%;
 }
 
 .app-meeting-choice{
@@ -200,4 +199,10 @@ body{
 }
 
 
+
+/*PLACE CSS */
+
+.app-add-place{
+    color: wheat;
+}
 

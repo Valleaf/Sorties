@@ -5,6 +5,16 @@
 
 {% block body %}
     <link rel="stylesheet" href="{{ asset('assets/css/meetings.css') }}">
+    {% if app.request.cookies.has('theme')%}
+        {% set test = app.request.cookies.get('theme') %}
+        {% if test == 2 %}
+            <link rel="stylesheet" href="{{ asset('assets/css/dark-meetings.css') }}">
+        {% elseif test == 3 %}
+            <link rel="stylesheet" href="{{ asset('assets/css/lime-meetings.css') }}">
+        {% elseif test == 4 %}
+            <link rel="stylesheet" href="{{ asset('assets/css/red-meetings.css') }}">
+        {% endif %}
+    {% endif %}
     {% set i = 1 %}
     {% set j = 1 %}
 

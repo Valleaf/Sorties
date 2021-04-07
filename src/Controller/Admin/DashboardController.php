@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Campus;
 use App\Entity\City;
+use App\Entity\Group;
 use App\Entity\Meeting;
 use App\Entity\Place;
 use App\Entity\State;
@@ -39,6 +40,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('City','fa fa-city',City::class ),
             MenuItem::linkToCrud('State','fa fa-info-circle',State::class ),
             MenuItem::linkToCrud('Campus','fa fa-school',Campus::class ),
+            MenuItem::linkToCrud('Groups','fa fa-user-friends',Group::class ),
             ];
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);

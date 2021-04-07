@@ -17,8 +17,13 @@ class CityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',TextType::class)
-            ->add('postcode',NumberType::class);
+            ->add('name',TextType::class,[
+
+            ])
+            ->add('postcode',NumberType::class,[
+                'scale'=>0,
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

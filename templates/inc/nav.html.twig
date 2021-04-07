@@ -22,6 +22,8 @@ person_pin
                     </ul>
                 </li>
                 <li>
+
+
                     <a href="#">Meetings <span class="material-icons-outlined">
 nightlife
 </span></a>
@@ -33,9 +35,29 @@ menu_book
 east
 </span></a></li>
                     </ul>
+
+
+                </li><li><a href="#">Groups <span class="material-icons-outlined">
+transfer_within_a_station
+</span></a>
+                    <ul class="menu vertical">
+                        <li><a href="{{ path('group_index') }}">Groups <span class="material-icons-outlined">
+group_work
+</span></a></li>
+                        <li><a href="{{ path('group_add') }}">Create a group <span class="material-icons-outlined">
+add
+</span></a></li>
+                    </ul>
                 </li>
+                <li><a href="{{ path('place') }}">Lieux <span class="material-icons-outlined">
+store
+</span></a></li>
+                <li><a href="{{ path('city') }}">Villes <span class="material-icons-outlined">
+location_city
+</span></a></li>
+
                 <li><a href="{{ path('app_logout') }}">Logout <span class="material-icons-outlined">
-public_off
+logout
 </span></a></li>
 
                 {% if is_granted("ROLE_ADMIN") %}
@@ -46,7 +68,7 @@ badge
 
             {% else %}
                 <li><a href="{{ path('app_login') }}">Login <span class="material-icons-outlined">
-hail
+login
 </span></a></li>
                 {#
                 <li><a href="{{ path('app_register') }}">Register</a></li>
@@ -57,14 +79,21 @@ hail
     </div>
     <div class="top-bar-right">
         <ul class="menu" data-dropdown-menu>
-            <li><button class="button" data-open="themeModal">Theme</button></li>
-            <li><button class="button" data-open="langueModal">Langue</button></li>
+            <li><button class="button secondary" data-open="themeModal">Theme</button></li>
+            <li><button class="button secondary" data-open="langueModal">Langue</button></li>
         </ul>
     </div>
     <div class="reveal" id="themeModal" data-reveal>
         <h1>THEME SELECTOR</h1>
         <p class="lead">Choix du theme</p>
-        <a href="{{ path('home_theme' , {'id':1}) }}">Theme numero 1</a>
+        <div class="grid-container">
+            <div class="grid-x align-center">
+        <a  class="button cell small-2" href="{{ path('home_theme' , {'id':1}) }}">Classique</a>
+        <a class="button cell small-2" href="{{ path('home_theme' , {'id':2}) }}">Fantaisie</a>
+        <a class="button cell small-2" href="{{ path('home_theme' , {'id':3}) }}">Moderne</a>
+        <a class="button cell small-2" href="{{ path('home_theme' , {'id':4}) }}">Gothique</a>
+            </div>
+        </div>
         <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
         </button>

@@ -16,7 +16,7 @@ class CityFixtures extends Fixture
     $faker = Factory::create('fr_FR');
         for($i=1;$i<=20;$i++){
             $city = new City();
-            $cpo = (int) $faker->postcode;
+            $cpo = $faker->postcode;
             $nom = $faker->city;
             $city->setName($nom);
             $city->setPostcode($cpo);

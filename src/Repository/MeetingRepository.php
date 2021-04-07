@@ -26,6 +26,14 @@ class MeetingRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
+    public function findAllAndStatuses(){
+        $querybuilder = $this->createQueryBuilder('m');
+        $querybuilder->join('m.status','s')
+            ->select('m','s');
+        $query = $querybuilder->getQuery();
+        return $query->getResult();
+    }
+
     public function findActive(SearchData $search,
                                User $user): Paginator
     {
@@ -47,7 +55,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
             ->join('m.status','s')
-            ->leftJoin('m.participants','p') //Reduit le nombre de requete, mais fait buguer au niveau de la recherche-
+            ->leftJoin('m.participants','p')
             ->andWhere('m.timeStarting >= :timeOneMonth')
             ->setParameter('timeOneMonth',"$timeOneMonth")
             ->orderBy('m.timeStarting')
@@ -66,6 +74,8 @@ class MeetingRepository extends ServiceEntityRepository
             $queryBuilder = $queryBuilder
                 ->andWhere('m.timeStarting <= :max')
                 ->setParameter('max',"{$search->max->format('Y-m-d')}");
+        //      dump($search->max->format('Y-m-d'));
+        //      exit();
         }
         if(!empty($search->isOrganizedBy)){
             $queryBuilder = $queryBuilder
@@ -78,8 +88,15 @@ class MeetingRepository extends ServiceEntityRepository
         }
 
         if(!empty($search->isRegisteredTo)){
+            $queryBuilder = $queryBuilder
+                ->andWhere('p.id IN (:id)')
+                ->setParameter('id',$user->getId());
+
         }
         if(!empty($search->isNotRegisteredTo)){
+            $queryBuilder = $queryBuilder
+                ->andWhere('p.id NOT IN (:id)')
+                ->setParameter('id',$user->getId());
         }
         if(!empty($search->campus)){
             $queryBuilder=$queryBuilder
@@ -94,6 +111,8 @@ class MeetingRepository extends ServiceEntityRepository
         //return $this->paginator->paginate($query,1,3);
         return new Paginator($query);
     }
+
+
 
 
 

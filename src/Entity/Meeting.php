@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Listeners\TimeListener;
 
 /**
  * @ORM\Entity(repositoryClass=MeetingRepository::class)
+ * @ORM\EntityListeners({TimeListener::class})
  */
 class Meeting
 {
@@ -29,7 +31,7 @@ class Meeting
 
     /**
      *
-     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\GreaterThanOrEqual("now")
      * @ORM\Column(type="datetime")
      */
     private $timeStarting;
@@ -41,7 +43,7 @@ class Meeting
     private $length;
 
     /**
-     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\GreaterThanOrEqual("now")
      * @Assert\LessThanOrEqual(propertyPath="timeStarting")
      * @ORM\Column(type="datetime")
      */
@@ -248,4 +250,6 @@ class Meeting
 
         return $this;
     }
+
+
 }

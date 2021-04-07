@@ -34,6 +34,14 @@ class State
         $this->meetings = new ArrayCollection();
     }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

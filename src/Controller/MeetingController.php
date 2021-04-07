@@ -73,8 +73,8 @@ class MeetingController extends AbstractController
     {
 
         $user = $this->getUser();
-        $status = new State();
-        $status->setLabel('Créée');
+        $statusRepo = $em->getRepository(State::class);
+        $status = $statusRepo->findOneBy(['label'=>'Créée']);
         $campus = $user->getCampus();
         $meeting = new Meeting();
         $meetingForm = $this->createForm(MeetingType::class, $meeting);
@@ -83,6 +83,7 @@ class MeetingController extends AbstractController
 
         if ($meetingForm->isSubmitted() && $meetingForm->isValid()) {
             $meeting->setOrganisedBy($user);
+            $meeting->setCampus($user->getCampus());
             $status->addMeeting($meeting);
             $campus->addMeeting($meeting);
             $em->persist($meeting);
@@ -91,7 +92,7 @@ class MeetingController extends AbstractController
             $this->sendEmail(
                 $mailer,$user->getEmail(),
                 'Confirmation : La sortie'.$meeting->getName() .'a été créée',
-                'Bonjour\nCeci est un email de confirmation.\nLa sortie '.$meeting->getName().'est valide');
+                'Bonjour\nCeci est un email de confirmation.\nLa sortie '.$meeting->getName(). 'est valide');
             return $this->redirectToRoute('meeting_index', []);
         }
         dump($meeting);

@@ -17,9 +17,6 @@ class MeetingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $future = new \DateTime();
-        $future = date_add($future, date_interval_create_from_date_string('10 days'));
-        $future->setTime(21,30);
 
         $builder
             ->add('name',TextType::class,[
@@ -28,7 +25,6 @@ class MeetingType extends AbstractType
             ])
             ->add('timeStarting', DateTimeType::class,[
                 'years'=>[2021,2022],
-                'html5'=>true
             ])
             ->add('length',ChoiceType::class,[
                 'choices'  => [

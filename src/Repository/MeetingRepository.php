@@ -28,7 +28,7 @@ class MeetingRepository extends ServiceEntityRepository
 
     public function findALlnoParameters(){
         $queryBuilder = $this->createQueryBuilder('m');
-        $queryBuilder
+        $queryBuilder->distinct()
             ->select('m',
                 'mo',
                 'oc',
@@ -41,7 +41,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
             ->join('m.status','s')
-            ->join('m.participants','p');
+            ->leftJoin('m.participants','p');
             $query = $queryBuilder->getQuery();
             return $query->getResult();
     }
@@ -54,7 +54,7 @@ class MeetingRepository extends ServiceEntityRepository
         $currentTime->modify('- 30 days');
         $timeOneMonth = $currentTime->format('Y-m-d');
         $queryBuilder = $this->createQueryBuilder('m');
-        $queryBuilder
+        $queryBuilder->distinct()
             ->select('m',
                 'mo',
                 'oc',
@@ -67,7 +67,7 @@ class MeetingRepository extends ServiceEntityRepository
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
             ->join('m.status','s')
-            ->join('m.participants','p')
+            ->leftJoin('m.participants','p')
             ->andWhere('m.timeStarting >= :timeOneMonth')
             ->setParameter('timeOneMonth',"$timeOneMonth")
             ->orderBy('m.timeStarting')

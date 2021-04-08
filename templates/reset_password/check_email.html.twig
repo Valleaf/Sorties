@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}{{ parent()}} Email envoyé{% endblock %}
 
 {% block body %}
     <video autoplay muted loop class="myVideo">
@@ -8,9 +8,9 @@
     </video>
     <div class="request-content">
     <p>
-        An email has been sent that contains a link that you can click to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        Un email a été envoyé avec un lien pour réinitialiser votre mot de passe
+        Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
     </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <p>Si aucun email n'est reçu, vérifiez les pourriels ou <a href="{{ path('app_forgot_password_request') }}">réessayez</a>.</p>
     </div>
 {% endblock %}

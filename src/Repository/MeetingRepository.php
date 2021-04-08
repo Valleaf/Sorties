@@ -54,7 +54,7 @@ class MeetingRepository extends ServiceEntityRepository
         $currentTime->modify('- 30 days');
         $timeOneMonth = $currentTime->format('Y-m-d');
         $queryBuilder = $this->createQueryBuilder('m');
-        $queryBuilder->distinct()
+        $queryBuilder
             ->select('m',
                 'mo',
                 'oc',
@@ -67,11 +67,10 @@ class MeetingRepository extends ServiceEntityRepository
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
             ->join('m.status','s')
-            ->innerJoin('m.participants','p')
+            ->join('m.participants','p')
             ->andWhere('m.timeStarting >= :timeOneMonth')
             ->setParameter('timeOneMonth',"$timeOneMonth")
             ->orderBy('m.timeStarting')
-            ->groupBy('m.id','mp.id','mpc.id','mo.id')
         ;
         if(!empty($search->q)) {
             $queryBuilder = $queryBuilder

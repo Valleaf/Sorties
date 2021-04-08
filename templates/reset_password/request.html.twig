@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}{{ parent() }} Mot de pass oublié{% endblock %}
 
 {% block body %}
     <video autoplay muted loop class="myVideo">
@@ -11,17 +11,16 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
     <div class="request-content">
-    <h1>Reset your password</h1>
+    <h1>Mot de pass oublié</h1>
 
     {{ form_start(requestForm) }}
         {{ form_row(requestForm.email) }}
         <div>
             <small>
-                Enter your email address and we we will send you a
-                link to reset your password.
+                Entrez votre adress email et on enverra un lien pour choisir un nouveau mot de passe
             </small>
         </div>
 
-        <button class="button">Send password reset email</button>
+        <button class="button">Envoyer email</button>
     {{ form_end(requestForm) }}</div>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}{{ parent() }}Mot de pass oublié{% endblock %}
 
 {% block body %}
 
@@ -8,10 +8,10 @@
         <source src="{{ asset('assets/vid/login-black.mp4') }}" type="video/mp4">
     </video>
     <div class="request-content">
-    <h1>Reset your password</h1>
+    <h1>Mot de pass oublié</h1>
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class="button">Reset password</button>
+        <button class="button">Mot de pass oublié</button>
     {{ form_end(resetForm) }}</div>
 {% endblock %}

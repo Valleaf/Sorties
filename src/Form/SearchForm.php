@@ -37,6 +37,7 @@ class SearchForm extends AbstractType
                 'label'=>false,
                 'required'=>false,
                 'years'=>[2021,2022],
+                'widget'=>'single_text',
                 'attr'=>[
                     'placeholder'=>'Entre '
                 ]

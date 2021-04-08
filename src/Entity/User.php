@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mailer\MailerInterface;
@@ -17,6 +18,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"email"})
  * @Vich\Uploadable()
  */
 class User  implements UserInterface
@@ -29,6 +32,7 @@ class User  implements UserInterface
     private $id;
 
     /**
+     *
      * @Assert\NotBlank(message="Entrez un pseudo valide")
      * @Assert\Length(min=5,max=40)
      * @ORM\Column(type="string", length=180, unique=true)

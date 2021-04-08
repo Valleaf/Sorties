@@ -47,7 +47,8 @@ class MeetingController extends AbstractController
         $user = $this->getUser();
         $meetingRepo = $this->getDoctrine()->getRepository(Meeting::class);
         $meeting = $meetingRepo->find($id);
-
+        //la sortie existe ??
+        //verifier le max de participants et le status
         if ($meeting->getParticipants()->contains($user)) {
             if ($meeting->getStatus()->getLabel() == 'Ouverte') {
                 $meeting->removeParticipant($user);

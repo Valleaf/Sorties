@@ -42,6 +42,7 @@ class TimeListener
             //$timeFinished = $start;
             //$timeFinished = $timeFinished->modify('+' . $duration . ' minutes');
             $currentTime = new \DateTime();
+            //FIARE DES REQUETES AVEC status= x et current temps donc 5 requetes au lieu de tout ca !!!
             if($m->getStatus() != $cancelled){
                 if ($limit >= $currentTime) {
                     $m->setStatus($ouverte);

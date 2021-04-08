@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} | Cancel Meeting
+    {{ parent() }} | Annuler une sortie
  {% endblock %}
 
 {% block body %}
+
+        <div class="grid-x app-cancel-page">
+            <div class="cell small-8">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/cancel.css') }}">
     {{ form_start(form) }}
-
     {{ form_row(form.explanation) }}
-    <button class="button danger" type="submit">Cancel this meeting</button>
+    <button class="button danger" type="submit">Annuler cette sortie</button>
     {{ form_end(form) }}
-
+            </div>
+    </div>
 {% endblock %}
 

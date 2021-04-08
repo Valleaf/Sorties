@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | Accès non autorisé
+{% endblock %}
+
+{% block body %}
+    {% set name = '403' %}
+    {% set text =  'Vous n\'avez pas accès a cette page'%}
+    <link rel="stylesheet" href="{{ asset('assets/css/errorpage.css') }}">
+    {% include 'error/errorpage.html.twig' %}
+{% endblock %}

@@ -11,6 +11,7 @@ use App\Form\MeetingType;
 use App\Form\SearchForm;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,14 +90,13 @@ class MeetingController extends AbstractController
             $em->persist($meeting);
             $em->flush();
             $this->addFlash('success', 'The meeting was sucessfully created !');
-            $this->sendEmail(
-                $mailer,$user->getEmail(),
-                'Confirmation : La sortie'.$meeting->getName() .'a été créée',
-                'Bonjour\nCeci est un email de confirmation.\nLa sortie '.$meeting->getName(). 'est valide');
+            $user->sendEmail(
+                $mailer,
+                'Confirmation : La sortie '.$meeting->getName() .'a été créée',
+                'La sortie '.$meeting->getName(). ' est valide et a bien étée créée');
             return $this->redirectToRoute('meeting_index', []);
         }
-        dump($meeting);
-        $request->get('meeting');
+
         return $this->render('meeting/add.html.twig', [
             'meetingForm' => $meetingForm->createView(),
         ]);
@@ -105,7 +105,7 @@ class MeetingController extends AbstractController
     /**
      * @Route ("/meeting/cancel/{id}", name="meeting_cancel",requirements={"id"="\d+"})
      */
-    public function cancelMeeting(EntityManagerInterface $em, $id, Request $request)
+    public function cancelMeeting(MailerInterface $mailer ,EntityManagerInterface $em, $id, Request $request)
     {
 
         $user = $this->getUser();
@@ -126,6 +126,13 @@ class MeetingController extends AbstractController
                 $em->persist($cancelledMeeting);
                 $em->flush();
                 $this->addFlash('success', 'You have successfully cancelled this meeting!');
+                foreach ($cancelledMeeting->getParticipants() as $participant){
+                    $participant->sendEmail(
+                        $mailer,
+                        'Annulation : La sortie '.$cancelledMeeting->getName() .'a été annulée',
+                        'La sortie '.$cancelledMeeting->getName(). ' a été annulée');
+                    return $this->redirectToRoute('meeting_index', []);
+                }
                 return $this->redirectToRoute('home');
             } else {
                 $this->addFlash('warning', 'The cancellation failed!');
@@ -138,15 +145,5 @@ class MeetingController extends AbstractController
 
     }
 
-    public function sendEmail(MailerInterface $mailer,string $email, string $subject,string $text) :void
-    {
-        $email = (new Email())
-            ->from('confirmation@meetup.com')
-            ->to($email)
-            ->subject($subject)
-            ->text($text);
 
-        $mailer->send($email);
-
-    }
 }

@@ -18,11 +18,15 @@ class CityType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,[
-
+                'data'=>'Lyon',
+                'label'=>'Nom de la ville',
+                'help'=>'La ville doit avoir un nom'
             ])
             ->add('postcode',NumberType::class,[
                 'scale'=>0,
-
+                'data'=>69130,
+                'label'=>'Code Postal',
+                'invalid_message'=>'Le code postal doit comporter 5 chiffres'
             ]);
     }
 

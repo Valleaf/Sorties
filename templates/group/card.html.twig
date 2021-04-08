@@ -1,0 +1,7 @@
+
+<div class="cell small-3 fancy">
+    <a href="{{ path('group_add_members',{'id':g.id}) }}"><h1>{{ g.name }}</h1></a>
+    {% for p in g.members %}
+        <h4>{{ p }}</h4>
+    {% endfor %}
+</div>

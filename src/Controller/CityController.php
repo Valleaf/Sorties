@@ -20,6 +20,8 @@ class CityController extends AbstractController
         $cityForm->handleRequest($request);
 
         if ($cityForm->isSubmitted() && $cityForm->isValid()) {
+            $cityRepo = $em->getRepository(City::class);
+
             $em->persist($city);
             $em->flush();
             $this->addFlash('success', 'La ville a bien été ajoutée');

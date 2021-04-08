@@ -1,0 +1,66 @@
+<style type="text/css">
+
+    .header {
+        background: #8a8a8a;
+    }
+
+    .header .columns {
+        padding-bottom: 0;
+    }
+
+    .header p {
+        color: #fff;
+        margin-bottom: 0;
+    }
+
+    .header .wrapper-inner {
+        padding: 20px; /*controls the height of the header*/
+    }
+
+    .header .container {
+        background: #8a8a8a;
+    }
+
+    .wrapper.secondary {
+        background: #f3f3f3;
+    }
+
+</style>
+<!-- move the above styles into your custom stylesheet -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation-emails/2.3.1/foundation-emails.min.css" integrity="sha512-9sIiS0bJkbDiKWOECYpIJEJDAtFD8AJWUZAyyON2lo1IcwQFw/4o1iVThrGxNtMy45muRaQEOXIMMYgVroTNPA==" crossorigin="anonymous" />
+
+
+
+
+<container>
+
+    <spacer size="16"></spacer>
+
+    <row>
+        <columns>
+
+            <h1>Hi, {{ username }}</h1>
+            <p class="lead">{{ text }} </p>
+
+        </columns>
+    </row>
+
+    <wrapper class="secondary">
+        <spacer size="16"></spacer>
+        <row>
+            <columns small="12" large="6">
+                <h5>Connect With Us:</h5>
+                <menu class="vertical">
+                    <a style="text-align: left;" href="https://twitter.com/Meetup">Twitter</a>
+                    <a style="text-align: left;" href="https://www.facebook.com/Meetup">Facebook</a>
+                </menu>
+            </columns>
+            <columns small="12" large="6">
+                <h5>Contact Info:</h5>
+                <p>Phone: 408-341-0600</p>
+                <p>Email: <a href="mailto:contact@meetup.com">contact@meetup.com</a></p>
+            </columns>
+        </row>
+    </wrapper>
+
+</container>

@@ -62,17 +62,17 @@
                         </div>
                         <div class="cell small-12">
                         {% if (meeting.registerUntil > date() and meeting.status.label == 'Ouverte') or(meeting.status.label == 'Cloturee' and app.user in  (meeting.participants))  %}
-                            <button class="button success"><a href="{{ path('meeting_add_or_remove',{'id':meeting.id}) }}"><h5>I want to participate !
-                                    / I do not want to go anymore</h5></a></button>
+                            <button class="button success"><a href="{{ path('meeting_add_or_remove',{'id':meeting.id}) }}"><h5>Je veux m'inscrire !
+                                    / Je veux me désister</h5></a></button>
                         {% else %}
                             <h5>
-                                Registration is not allowed at this time
+                                L'inscription est impossible a cet instant
                             </h5>
                         {% endif %}
                         {% if meeting.organisedBy.username == app.user.username and meeting.status.label != 'Annulee' %}
                             <p class="cell small-2">
                                 <a href="{{ path('meeting_cancel',{'id':meeting.id}) }}">
-                                <button class="alert button" data-toggle="animatedModal10">Cancel meeting</button>
+                                <button class="alert button" data-toggle="animatedModal10">Annuler sortie</button>
                                 </a>
                             </p>
                         {% endif %}

@@ -26,21 +26,7 @@ class MeetingRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
-    public function findAllAndStatuses(){
-        $querybuilder = $this->createQueryBuilder('m');
-        $querybuilder->join('m.status','s')
-            ->select('m','s');
-        $query = $querybuilder->getQuery();
-        return $query->getResult();
-    }
-
-    public function findActive(SearchData $search,
-                               User $user): Paginator
-    {
-
-        $currentTime = new \DateTime();
-        $currentTime->modify('- 30 days');
-        $timeOneMonth = $currentTime->format('Y-m-d');
+    public function findALlnoParameters(){
         $queryBuilder = $this->createQueryBuilder('m');
         $queryBuilder
             ->select('m',
@@ -55,10 +41,37 @@ class MeetingRepository extends ServiceEntityRepository
             ->innerJoin('m.place','mp')
             ->join('mp.city','mpc')
             ->join('m.status','s')
-            ->leftJoin('m.participants','p')
+            ->join('m.participants','p');
+            $query = $queryBuilder->getQuery();
+            return $query->getResult();
+    }
+
+    public function findActive(SearchData $search,
+                               User $user): Paginator
+    {
+
+        $currentTime = new \DateTime();
+        $currentTime->modify('- 30 days');
+        $timeOneMonth = $currentTime->format('Y-m-d');
+        $queryBuilder = $this->createQueryBuilder('m');
+        $queryBuilder->distinct()
+            ->select('m',
+                'mo',
+                'oc',
+                'mp',
+                'mpc',
+                's',
+                'p')
+            ->innerJoin('m.organisedBy','mo')
+            ->join('mo.campus','oc')
+            ->innerJoin('m.place','mp')
+            ->join('mp.city','mpc')
+            ->join('m.status','s')
+            ->innerJoin('m.participants','p')
             ->andWhere('m.timeStarting >= :timeOneMonth')
             ->setParameter('timeOneMonth',"$timeOneMonth")
             ->orderBy('m.timeStarting')
+            ->groupBy('m.id','mp.id','mpc.id','mo.id')
         ;
         if(!empty($search->q)) {
             $queryBuilder = $queryBuilder
@@ -103,8 +116,6 @@ class MeetingRepository extends ServiceEntityRepository
                 ->andWhere('m.campus = :campus')
                 ->setParameter('campus',"{$search->campus->getId()}");
         }
-
-
 
 
         $query = $queryBuilder->getQuery();

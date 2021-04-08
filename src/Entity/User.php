@@ -7,7 +7,9 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -471,5 +473,20 @@ class User  implements UserInterface
         }
 
         return $this;
+    }
+
+    public function sendEmail(MailerInterface $mailer, string $subject,string $text) :void
+    {
+        $email = (new TemplatedEmail())
+            ->from('confirmation@meetup.com')
+            ->to($this->getEmail())
+            ->subject($subject)
+            ->htmlTemplate('email/confirmation.html.twig')
+            ->context([
+                'username' => $this->getUsername(),
+                'text' => $text,
+            ]);
+
+        $mailer->send($email);
     }
 }

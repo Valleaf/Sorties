@@ -7,44 +7,44 @@
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text">Meetup!</li>
-            <li><a href="{{ path('home') }}">Home <span class="material-icons-outlined">
+            <li><a href="{{ path('home') }}">Accueil <span class="material-icons-outlined">
 cottage
 </span></a></li>
 
             {% if app.user %}
                 <li>
-                    <a href="#">Profile <span class="material-icons-outlined">
+                    <a href="#">Profil <span class="material-icons-outlined">
 person_pin
 </span></a>
                     <ul class="menu vertical">
                         <li><a href="{{ path('user_profile') }}">Profile</a></li>
-                        <li><a href="{{ path('user_profile_modify') }}">Modify your profile</a></li>
+                        <li><a href="{{ path('user_profile_modify') }}">Modifier Profil</a></li>
                     </ul>
                 </li>
                 <li>
 
 
-                    <a href="#">Meetings <span class="material-icons-outlined">
+                    <a href="#">Sorties <span class="material-icons-outlined">
 nightlife
 </span></a>
                     <ul class="menu vertical">
-                        <li><a href="{{ path('meeting_index') }}">Meetings <span class="material-icons-outlined">
+                        <li><a href="{{ path('meeting_index') }}">Sorties <span class="material-icons-outlined">
 menu_book
 </span></a></li>
-                        <li><a href="{{ path('meeting_add') }}">Add a meeting <span class="material-icons-outlined">
+                        <li><a href="{{ path('meeting_add') }}">Ajouter une sortie <span class="material-icons-outlined">
 east
 </span></a></li>
                     </ul>
 
 
-                </li><li><a href="#">Groups <span class="material-icons-outlined">
+                </li><li><a href="#">Groupes <span class="material-icons-outlined">
 transfer_within_a_station
 </span></a>
                     <ul class="menu vertical">
-                        <li><a href="{{ path('group_index') }}">Groups <span class="material-icons-outlined">
+                        <li><a href="{{ path('group_index') }}">Groupes <span class="material-icons-outlined">
 group_work
 </span></a></li>
-                        <li><a href="{{ path('group_add') }}">Create a group <span class="material-icons-outlined">
+                        <li><a href="{{ path('group_add') }}">Créer un Groupe <span class="material-icons-outlined">
 add
 </span></a></li>
                     </ul>
@@ -56,7 +56,7 @@ store
 location_city
 </span></a></li>
 
-                <li><a href="{{ path('app_logout') }}">Logout <span class="material-icons-outlined">
+                <li><a href="{{ path('app_logout') }}">Déconnexion <span class="material-icons-outlined">
 logout
 </span></a></li>
 
@@ -67,7 +67,7 @@ badge
                 {% endif %}
 
             {% else %}
-                <li><a href="{{ path('app_login') }}">Login <span class="material-icons-outlined">
+                <li><a href="{{ path('app_login') }}">Connexion<span class="material-icons-outlined">
 login
 </span></a></li>
                 {#

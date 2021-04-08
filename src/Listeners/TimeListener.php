@@ -17,16 +17,21 @@ class TimeListener
 
         $em = $eventArgs->getEntityManager();
        $statusRepo = $eventArgs->getEntityManager()->getRepository(State::class);
-       $ouverte = $statusRepo->findOneBy(['label' => 'Ouverte']);
-       $cloturee = $statusRepo->findOneBy(['label' => 'Cloturee']);
-       $enCours = $statusRepo->findOneBy(['label' => ' Activite en cours ']);
-       $Passee = $statusRepo->findOneBy(['label' => 'Passee']);
-       $cancelled = $statusRepo->findOneBy(['label'=>'Annulee']);
+     // $ouverte = $statusRepo->findOneBy(['label' => 'Ouverte']);
+     // $cloturee = $statusRepo->findOneBy(['label' => 'Cloturee']);
+     // $enCours = $statusRepo->findOneBy(['label' => ' Activite en cours ']);
+     // $Passee = $statusRepo->findOneBy(['label' => 'Passee']);
+     // $cancelled = $statusRepo->findOneBy(['label'=>'Annulee']);
+       $ouverte = $statusRepo->find(97);
+       $cloturee = $statusRepo->find(98);
+       $enCours = $statusRepo->find(99);
+       $Passee = $statusRepo->find(100);
+       $cancelled = $statusRepo->find(101);
 
 
         $meetingRepo = $eventArgs->getEntityManager()->getRepository(Meeting::class);
-       $meetings = $meetingRepo->findAll();
-       // $meetings = $meetingRepo->findAllAndStatuses();
+      // $meetings = $meetingRepo->findAll();
+        $meetings = $meetingRepo->findALlnoParameters();
 
         foreach ($meetings as $m) {
             $start = $m->getTimeStarting();
@@ -34,8 +39,8 @@ class TimeListener
             $max = $m->getMaxParticipants();
             $nbParticipants = $m->getParticipants()->count();
             $duration = $m->getLength();
-            $timeFinished = $start;
-            $timeFinished = $timeFinished->modify('+' . $duration . ' minutes');
+            //$timeFinished = $start;
+            //$timeFinished = $timeFinished->modify('+' . $duration . ' minutes');
             $currentTime = new \DateTime();
             if($m->getStatus() != $cancelled){
                 if ($limit >= $currentTime) {
@@ -52,8 +57,8 @@ class TimeListener
                 if ($start <= $currentTime) {
                     $m->setStatus($enCours);
                 }
-
-                if ($timeFinished <= $currentTime) {
+                $currentTime = $currentTime->modify('-' . $duration . ' minutes');
+                if ($start <= $currentTime) {
                     $m->setStatus($Passee);
                 }
             }

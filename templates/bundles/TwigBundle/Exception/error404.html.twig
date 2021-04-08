@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ parent() }} | Page introuvable ou inexistante
+{% endblock %}
+
+{% block body %}
+    {% set name = '404' %}
+    {% set text =  'Cette page n\'existe pas ou est introuvable'%}
+    <link rel="stylesheet" href="{{ asset('assets/css/errorpage.css') }}">
+    {% include 'error/errorpage.html.twig' %}
+{% endblock %}

@@ -4,16 +4,12 @@
 
 {% block body %}
 
-    <div class="grid-container">
-        <div class="grid-x">
+    <link rel="stylesheet" href="{{ asset('assets/css/groups.css') }}">
+    <div class="grid-container ">
+        <div class="grid-x app-group">
             {% for g in groups %}
 
-                <div class="cell small-3">
-                    <a href="{{ path('group_add_members',{'id':g.id}) }}"><h1>{{ g.name }}</h1></a>
-                    {% for p in g.members %}
-                    <h4>{{ p }}</h4>
-                    {% endfor %}
-                </div>
+                {% include 'group/card.html.twig' %}
 
             {% endfor %}
         </div>

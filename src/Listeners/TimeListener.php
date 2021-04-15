@@ -11,7 +11,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class TimeListener
 {
-
+/*
+ * Trop de requetes : la solution serait de refaire une requete dans le controller et faire des reaquetes sql selon statut et l'heure actuelle.
     public function postLoad(Meeting $meeting, LifecycleEventArgs $eventArgs)
     {
 
@@ -72,5 +73,5 @@ class TimeListener
 
 
     }
-
+*/
 }
